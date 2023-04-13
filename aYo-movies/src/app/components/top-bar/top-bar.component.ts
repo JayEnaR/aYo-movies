@@ -14,13 +14,13 @@ export class TopBarComponent implements OnInit {
 
   ngOnInit(): void {
     this._themeService.isDarkMode$.subscribe(isDark => {
-      localStorage.setItem('darkMode', this.isDarkMode.toString());
+      this.isDarkMode = isDark;
     });
   }
 
   onDarkModeToggle(): void {
-    this._themeService.toggleDarkMode(this.isDarkMode);
     this.isDarkMode = (this.isDarkMode == true ? false : true);
+    this._themeService.toggleDarkMode(this.isDarkMode);
   }
   
 }
