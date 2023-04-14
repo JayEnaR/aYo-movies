@@ -13,14 +13,14 @@ import { MovieSearchService } from 'src/app/services/movie-search.service';
 export class SearchBarComponent implements OnInit {
 
   searchForm: FormGroup;
-  isSearching: boolean = false;
+  hasValue: boolean = false;
   queryType: QueryTypeEnum = QueryTypeEnum.movie;
 
   constructor(private _formBuilder: FormBuilder,
     private _movieSearchService: MovieSearchService) {
     this.searchForm = this.buildForm();
-    this.searchForm.get('search')!.statusChanges.subscribe((status: string) => {
-      status === "PENDING" ? this.isSearching = true : this.isSearching = false;
+    this.searchForm.get('search')!.valueChanges.subscribe((value: string) => {
+      this.hasValue = (value ? true : false);
     });
   }
 
@@ -54,7 +54,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   clearSearch(): void {
-
+    this.searchForm.reset();
   }
 
   searchBarValidator(): AsyncValidatorFn {

@@ -4,8 +4,8 @@
         <mat-form-field class="w-96" appearance="outline">
             <!-- <mat-label>Search</mat-label> -->
             <input id="search" matInput [formControlName]="'search'">
-            <mat-icon matPrefix>search</mat-icon>
-            <button mat-icon-button matSuffix (click)="clearSearch()" >
+            <mat-icon *ngIf="!hasValue" matPrefix>search</mat-icon>
+            <button *ngIf="hasValue" mat-icon-button matSuffix (click)="clearSearch()" >
                 <mat-icon>close</mat-icon>
               </button>
             <!-- <mat-progress-spinner *ngIf="isSearching" class="pr-5" [diameter]="24" [mode]="'indeterminate'">
