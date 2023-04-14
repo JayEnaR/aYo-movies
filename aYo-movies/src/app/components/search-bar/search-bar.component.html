@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center w-full h-full mt-12">
+<div class="flex flex-col items-center w-full h-full mt-12 ">
     <form class="mx-auto mt-8" [formGroup]="searchForm">
         <!-- Movie search input -->
         <mat-form-field class="w-96" appearance="outline">
@@ -10,8 +10,10 @@
         </mat-form-field>
     </form>
     <!-- Chipss -->
+    <!-- Not sure how to get Tailwind to pick up my primaries -->
     <mat-chip-list aria-label="Fish selection" class="ring-inset ring-primary">
-        <mat-chip *ngFor="let chip of queryTypes" [class.ring-2]="queryType == chip.key"
-            (click)="onChipChange(chip.key)">{{chip.value}}</mat-chip>
+        <mat-chip *ngFor="let chip of queryTypes" [class.ring-2]="queryType == chip.key" (click)="onChipChange(chip.key)">
+            <label class="cursor-pointer">{{chip.value}}</label>
+        </mat-chip>
     </mat-chip-list>
 </div>
