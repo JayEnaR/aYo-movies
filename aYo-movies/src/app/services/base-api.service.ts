@@ -26,7 +26,7 @@ export class BaseApiService {
   }
 
   private handleError(e: HttpErrorResponse): Observable<any> {
-    // Display some notification to the user 
+    // Could display some notification to the user here
     return of(e);
   }
 }
