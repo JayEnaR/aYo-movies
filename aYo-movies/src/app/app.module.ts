@@ -9,6 +9,7 @@ import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { AudioVisualSearchComponent } from './components/audio-visual-search/audio-visual-search.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { AudioVisualResultComponent } from './components/audio-visual-result/audio-visual-result.component';
+import { ProgressBarComponent } from './components/shared/progress-bar/progress-bar.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AudioVisualResultComponent } from './components/audio-visual-result/aud
     TopBarComponent,
     AudioVisualSearchComponent,
     SearchBarComponent,
-    AudioVisualResultComponent
+    AudioVisualResultComponent,
+    ProgressBarComponent
   ],
   imports: [
     HttpClientModule,
