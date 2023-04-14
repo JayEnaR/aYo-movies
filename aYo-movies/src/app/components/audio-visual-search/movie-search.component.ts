@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './movie-search.component.html',
   styleUrls: ['./movie-search.component.scss']
 })
-export class MovieSearchComponent implements OnInit {
+export class AudioVisualSearchComponent implements OnInit {
 
   constructor() { }
 

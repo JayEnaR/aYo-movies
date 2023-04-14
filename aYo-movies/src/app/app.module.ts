@@ -6,14 +6,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from "./modules/shared.module";
 import { TopBarComponent } from './components/top-bar/top-bar.component';
-import { MovieSearchComponent } from './components/movie-search/movie-search.component';
+import { AudioVisualSearchComponent } from './components/audio-visual-search/movie-search.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
-    MovieSearchComponent,
+    AudioVisualSearchComponent,
     SearchBarComponent
   ],
   imports: [
