@@ -3,16 +3,15 @@
         <!-- Movie search input -->
         <mat-form-field class="w-96" appearance="outline">
             <input id="search" matInput [formControlName]="'search'">
-            <mat-icon *ngIf="!hasValue" matPrefix>search</mat-icon>
-            <button *ngIf="hasValue" mat-icon-button matSuffix (click)="clearSearch()">
-                <mat-icon>close</mat-icon>
-            </button>
+            <mat-icon *ngIf="!hasValue" matPrefix class="mr-2">search</mat-icon>
+            <mat-icon *ngIf="hasValue" (click)="clearSearch()" matSuffix class="cursor-pointer">close</mat-icon>
         </mat-form-field>
     </form>
     <!-- Chipss -->
     <!-- Not sure how to get Tailwind to pick up my primaries -->
     <mat-chip-list aria-label="Fish selection" class="ring-inset ring-primary">
-        <mat-chip *ngFor="let chip of queryTypes" [class.ring-2]="queryType == chip.key" (click)="onChipChange(chip.key)">
+        <mat-chip *ngFor="let chip of queryTypes" [class.ring-2]="queryType == chip.key"
+            (click)="onChipChange(chip.key)">
             <label class="cursor-pointer">{{chip.value}}</label>
         </mat-chip>
     </mat-chip-list>
