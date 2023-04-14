@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { ISearchResult } from 'src/app/models/ISearchResult';
 import { AudioVisualSearchService } from 'src/app/services/movie-search.service';
 
@@ -7,12 +8,13 @@ import { AudioVisualSearchService } from 'src/app/services/movie-search.service'
   templateUrl: './audio-visual-result.component.html',
   styleUrls: ['./audio-visual-result.component.scss']
 })
-export class AudioVisualResultComponent implements OnInit {
+export class AudioVisualResultComponent implements OnInit, OnDestroy {
 
+  private unsub: Subject<void> = new Subject<void>();
   audioVisuals: ISearchResult[] = [];
   isSpinning: boolean = false;
 
-  constructor(private _movieSearchService: AudioVisualSearchService) { 
+  constructor(private _movieSearchService: AudioVisualSearchService) {
   }
 
   ngOnInit(): void {
@@ -20,10 +22,15 @@ export class AudioVisualResultComponent implements OnInit {
   }
 
   initAudioVisuals(): void {
-    this.audioVisuals = [];
-    this._movieSearchService.cinema$.subscribe(res => {
-      this.audioVisuals.push(res);
-    });
+    this._movieSearchService.cinema$.pipe(takeUntil(this.unsub))
+      .subscribe(res => {
+        this.audioVisuals = [];
+        this.audioVisuals.push(res);
+      });
   }
 
+  ngOnDestroy(): void {
+    this.unsub.next();
+    this.unsub.complete();
+  }
 }
