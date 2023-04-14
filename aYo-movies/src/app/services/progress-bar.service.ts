@@ -11,8 +11,8 @@ export class ProgressBarService {
   
   constructor() { }
 
-  showProgress(): boolean {
-    this.isProgressVisibleSrc.next(true);
+  showProgress(show: boolean): boolean {
+    this.isProgressVisibleSrc.next(show);
     return true;
   }
 }
