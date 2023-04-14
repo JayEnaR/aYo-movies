@@ -1,13 +1,14 @@
 <!-- Top bar area -->
 <div class="flex flex-col flex-auto w-full sticky top-0">
-    <div class="relative flex flex-0 items-center justify-between w-full h-16 sm:h-20 px-6 sm:px-8 z-49 bg-card gap-4">
-        <span class="text-3xl font-bold" >
-            logo goes here
-        </span>
-        <!-- Dark mode toggle -->
-        <button mat-icon-button (click)="onDarkModeToggle()" matTooltip="Toggle dark mode on/off">
-            <mat-icon *ngIf="isDarkMode">light_mode</mat-icon>
-            <mat-icon *ngIf="!isDarkMode">dark_mode</mat-icon>
-        </button>
-    </div>
+    <mat-toolbar>
+        <div
+            class="flex flex-0 items-center justify-between w-full h-16 sm:h-20 px-6 sm:px-8 z-49 bg-card gap-4">
+            <img src="assets/images/aYo-movies-logo.png" alt="aYo logo" class="w-48">
+            <!-- Dark mode toggle -->
+            <button mat-icon-button (click)="onDarkModeToggle()" matTooltip="Toggle dark mode on/off">
+                <mat-icon *ngIf="isDarkMode" color="accent">light_mode</mat-icon>
+                <mat-icon *ngIf="!isDarkMode" color="primary">dark_mode</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
 </div>

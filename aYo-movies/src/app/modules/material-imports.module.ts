@@ -7,6 +7,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 
@@ -20,7 +21,8 @@ import { MatCardModule } from '@angular/material/card';
     MatProgressSpinnerModule,
     MatChipsModule,
     MatProgressBarModule,
-    MatCardModule
+    MatCardModule,
+    MatToolbarModule
   ],
   exports: [
     MatIconModule,
@@ -29,7 +31,8 @@ import { MatCardModule } from '@angular/material/card';
     MatProgressSpinnerModule,
     MatChipsModule,
     MatProgressBarModule,
-    MatCardModule
+    MatCardModule,
+    MatToolbarModule
   ]
 })
 export class MaterialImportsModule { }
