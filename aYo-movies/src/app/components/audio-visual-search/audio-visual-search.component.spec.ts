@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AudioVisualSearchComponent } from './movie-search.component';
+import { AudioVisualSearchComponent } from './audio-visual-search.component';
 
 describe('AudioVisualSearchComponent', () => {
   let component: AudioVisualSearchComponent;
