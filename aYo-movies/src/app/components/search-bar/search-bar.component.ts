@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, first, map, switchMap, tap } from 'rxjs';
+import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, map, of, switchMap } from 'rxjs';
 import { QueryTypeEnum } from 'src/app/enums/query-type.enum';
 import { ISearchResult } from 'src/app/models/ISearchResult';
 import { MovieSearchService } from 'src/app/services/movie-search.service';
@@ -25,13 +25,12 @@ export class SearchBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._movieSearchService.cinema$.subscribe(a => console.log(a)
-    )
+
   }
 
   buildForm(): FormGroup {
     return this._formBuilder.group({
-      search: ['', [Validators.min(1)], this.searchBarValidator()]
+      search: ['', [], this.searchBarValidator()]
     });
   }
 
@@ -59,12 +58,15 @@ export class SearchBarComponent implements OnInit {
 
   searchBarValidator(): AsyncValidatorFn {
     return (control: AbstractControl) => {
-      return control.valueChanges.pipe(
-        debounceTime(1000),
-        distinctUntilChanged(),
-        switchMap(phrase => this._movieSearchService.retrieveCinema(this.initQuery(phrase))),
-        map((res: ISearchResult) => res ? { noResult: true } : null)
-      );
+      if(control.value){        
+        return control.valueChanges.pipe(
+          debounceTime(1000),
+          distinctUntilChanged(),
+          switchMap(phrase => this._movieSearchService.retrieveCinema(this.initQuery(phrase))),
+          map((res: ISearchResult) => res ? { noResult: true } : null)
+        );
+      }
+      return of();
     }
   }
 
