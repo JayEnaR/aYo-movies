@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, map, of, switchMap, tap } from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged, map, of, switchMap, takeUntil, tap } from 'rxjs';
 import { QueryTypeEnum } from 'src/app/enums/query-type.enum';
 import { IQueryType } from 'src/app/models/IQueryType';
 import { ISearchResult } from 'src/app/models/ISearchResult';
@@ -71,7 +71,11 @@ export class SearchBarComponent implements OnInit {
     if (name) {
       this._progressBarservice.showProgress(true);
       const query = this.initQuery(this.searchForm.controls['search'].value);
-      this._movieSearchService.retrieveCinema(query).subscribe(() => this._progressBarservice.showProgress(false));
+      const unsub = new Subject<void>();
+      this._movieSearchService.retrieveCinema(query).pipe(takeUntil(unsub)).subscribe(() => {
+        this._progressBarservice.showProgress(false);
+        unsub.next();
+      });
     }
   }
 
