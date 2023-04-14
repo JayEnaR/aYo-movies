@@ -2,13 +2,19 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Inject, Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
 import { ConfigService } from './config.service';
+import { MochApiService } from './moch-api.service';
+
+/**
+ * Base service for handling all generic http requests and handle the errors
+ */
 
 @Injectable({
   providedIn: 'root'
 })
 export class BaseApiService {
 
-  constructor(public httpClient: HttpClient, @Inject(ConfigService) private _apiEndpointUrl: string) {
+  constructor(public httpClient: HttpClient,
+    @Inject(ConfigService) private _apiEndpointUrl: string) {
 
   }
 
@@ -20,7 +26,7 @@ export class BaseApiService {
   }
 
   private handleError(e: HttpErrorResponse): Observable<any> {
-    // Do with e as you wish to display
+    // Display some notification to the user 
     return of(e);
   }
 }
