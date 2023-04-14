@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, map, of, switchMap } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, of, switchMap, tap } from 'rxjs';
 import { QueryTypeEnum } from 'src/app/enums/query-type.enum';
 import { IQueryType } from 'src/app/models/IQueryType';
 import { ISearchResult } from 'src/app/models/ISearchResult';
-import { MovieSearchService } from 'src/app/services/movie-search.service';
+import { AudioVisualSearchService } from 'src/app/services/movie-search.service';
+import { ProgressBarService } from 'src/app/services/progress-bar.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -19,7 +20,8 @@ export class SearchBarComponent implements OnInit {
   queryTypes: IQueryType[] = [];
 
   constructor(private _formBuilder: FormBuilder,
-    private _movieSearchService: MovieSearchService) {
+    private _movieSearchService: AudioVisualSearchService,
+    private _progressBarservice: ProgressBarService) {
     this.searchForm = this.buildForm();
     this.searchForm.get('search')!.valueChanges.subscribe((value: string) => {
       this.hasValue = (value ? true : false);
@@ -67,8 +69,9 @@ export class SearchBarComponent implements OnInit {
     this.queryType = val;
     const name = this.searchForm.controls['search'].value;
     if (name) {
+      this._progressBarservice.showProgress(true);
       const query = this.initQuery(this.searchForm.controls['search'].value);
-      this._movieSearchService.retrieveCinema(query).subscribe();
+      this._movieSearchService.retrieveCinema(query).subscribe(() => this._progressBarservice.showProgress(false));
     }
   }
 
@@ -76,11 +79,13 @@ export class SearchBarComponent implements OnInit {
   searchBarValidator(): AsyncValidatorFn {
     return (control: AbstractControl) => {
       if (control.value) {
+        this._progressBarservice.showProgress(true);
         return control.valueChanges.pipe(
           debounceTime(1000),
           distinctUntilChanged(),
           switchMap(phrase => this._movieSearchService.retrieveCinema(this.initQuery(phrase))),
-          map((res: ISearchResult) => res ? { noResult: true } : null)
+          map((res: ISearchResult) => res ? { noResult: true } : null),
+          tap(() => this._progressBarservice.showProgress(false))
         );
       }
       return of();
