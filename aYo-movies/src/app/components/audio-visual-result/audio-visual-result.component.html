@@ -10,5 +10,8 @@
                 </div>
             </mat-card>
         </ng-container>
+        <ng-container *ngIf="audioVisuals.length == 0">
+            <span class="text-gray-400">{{result}}</span>
+        </ng-container>
     </div>
 </div>

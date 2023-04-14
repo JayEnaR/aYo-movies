@@ -12,7 +12,7 @@ export class AudioVisualResultComponent implements OnInit, OnDestroy {
 
   private unsub: Subject<void> = new Subject<void>();
   audioVisuals: ISearchResult[] = [];
-  isSpinning: boolean = false;
+  result: string = "";
 
   constructor(private _movieSearchService: AudioVisualSearchService) {
   }
@@ -24,8 +24,15 @@ export class AudioVisualResultComponent implements OnInit, OnDestroy {
   initAudioVisuals(): void {
     this._movieSearchService.cinema$.pipe(takeUntil(this.unsub))
       .subscribe(res => {
-        this.audioVisuals = [];
-        this.audioVisuals.push(res);
+        // Only show item(s) when the response is truthy
+        const response = (res.Response == "True");
+        if(response){
+          this.audioVisuals = [];
+          this.audioVisuals.push(res);
+        }
+        else{
+          this.result = "No items";
+        }
       });
   }
 
