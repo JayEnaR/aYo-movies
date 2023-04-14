@@ -62,6 +62,7 @@ export class SearchBarComponent implements OnInit {
 
   clearSearch(): void {
     this.searchForm.reset();
+    this._movieSearchService.cinema = {} as ISearchResult;
   }
 
   // Filters results based on audiovisual type
