@@ -3,8 +3,11 @@
         <!-- Movie search input -->
         <mat-form-field class="w-96" appearance="outline">
             <!-- <mat-label>Search</mat-label> -->
-            <input id="search" matInput [formControlName]="'search'" >
-            <mat-icon matSuffix>search</mat-icon>
+            <input id="search" matInput [formControlName]="'search'">
+            <mat-icon matPrefix>search</mat-icon>
+            <button mat-icon-button matSuffix (click)="clearSearch()" >
+                <mat-icon>close</mat-icon>
+              </button>
             <!-- <mat-progress-spinner *ngIf="isSearching" class="pr-5" [diameter]="24" [mode]="'indeterminate'">
             </mat-progress-spinner>
             <mat-error *ngIf="searchForm.controls['search'].errors?.['noResult']">
@@ -12,4 +15,5 @@
             </mat-error> -->
         </mat-form-field>
     </form>
+
 </div>
