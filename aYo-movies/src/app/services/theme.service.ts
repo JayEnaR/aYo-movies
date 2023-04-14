@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
 
-  private isDarkModeSrc : Subject<boolean> = new Subject<boolean>();
+  private isDarkModeSrc : ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
   isDarkMode$ = this.isDarkModeSrc.asObservable();
 
-  constructor() { }
+  constructor() { 
+    const isDark = JSON.parse(localStorage.getItem('darkMode')!) === true;
+    this.toggleDarkMode(isDark);
+   }
 
   toggleDarkMode(isDark: boolean): void {
     this.isDarkModeSrc.next(isDark);

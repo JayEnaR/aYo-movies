@@ -14,7 +14,6 @@ export class AppComponent {
   constructor(private _themeService: ThemeService) {
     this._themeService.isDarkMode$.subscribe(isDark => {
       this.isDarkMode = isDark;
-      localStorage.setItem('darkMode', this.isDarkMode.toString());
     });
   }
 
