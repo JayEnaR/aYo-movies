@@ -1,2 +1,4 @@
-<mat-progress-bar *ngIf="isProgressVisible" mode="indeterminate"></mat-progress-bar>
-<div class="prog-bar" *ngIf="!isProgressVisible"></div>
+<div class="sticky top-0">
+    <mat-progress-bar *ngIf="isProgressVisible" mode="indeterminate" ></mat-progress-bar>
+</div>
+<div class="h-1" *ngIf="!isProgressVisible"></div>
