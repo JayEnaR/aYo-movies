@@ -1,5 +1,5 @@
 # aYo-movies
-This is a basic Angular application to interact with the omdbapi API for searching audiovisual titles.
+This is a basic Angular application to interact with the [omdbapi](https://omdbapi.com/) API for searching audiovisual titles.
 
 ## Features
 - Infinite scrolling
