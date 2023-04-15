@@ -66,7 +66,4 @@ export class AudioVisualResultComponent implements OnInit, OnDestroy {
     this._indexedDbService.addAudioVisual(item);
   }
 
-  delete(item: ISearchResult): void {
-    this._indexedDbService.deleteAudioVisual(item);
-  }
 }

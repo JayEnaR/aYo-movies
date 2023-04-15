@@ -13,6 +13,7 @@ import { ProgressBarComponent } from './components/shared/progress-bar/progress-
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { WatchLaterComponent } from './components/watch-later/watch-later.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { environment } from '../environments/environment';
     AudioVisualSearchComponent,
     SearchBarComponent,
     AudioVisualResultComponent,
-    ProgressBarComponent
+    ProgressBarComponent,
+    WatchLaterComponent
   ],
   imports: [
     HttpClientModule,
