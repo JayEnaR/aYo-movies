@@ -27,7 +27,7 @@ export class AudioVisualResultComponent implements OnInit, OnDestroy {
         // Only show item(s) when the response is truthy
         this.result = "";
         this.audioVisuals = [];
-        res.Response == "True" ? this.audioVisuals.push(res) : this.result = "No items";
+        res.Response == "True" ? this.audioVisuals = res.Search : this.result = "No search results";
       });
   }
 

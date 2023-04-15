@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, switchMap, of, BehaviorSubject } from 'rxjs';
 import { MochApiService } from './moch-api.service';
 import { ISearchResult } from '../models/ISearchResult';
+import { IResponse } from '../models/IResponse';
 
 /**
  *  A service for retrieving movies
@@ -14,13 +15,13 @@ import { ISearchResult } from '../models/ISearchResult';
 })
 export class AudioVisualSearchService extends BaseApiService {
 
-  private cinemaSrc: Subject<ISearchResult> = new Subject<ISearchResult>();
+  private cinemaSrc = new Subject<IResponse<ISearchResult[]>>();
 
-  get cinema$(): Observable<ISearchResult> {
+  get cinema$(): Observable<IResponse<ISearchResult[]>> {
     return this.cinemaSrc.asObservable();
   }
 
-  set cinema(item: ISearchResult){
+  set cinema(item: IResponse<ISearchResult[]>) {
     this.cinemaSrc.next(item);
   }
 
@@ -28,13 +29,14 @@ export class AudioVisualSearchService extends BaseApiService {
     private configService: ConfigService,
     private _mochApiService: MochApiService) {
     super(_httpClient, configService.apiBaseUrl);
+    
   }
 
   // Retrieve audiovisual media from api
-  retrieveCinema(param: string): Observable<ISearchResult> {
+  retrieveCinemas(param: string): Observable<IResponse<ISearchResult[]>> {
     // Build the parameter
     param = `?apikey=${this._mochApiService.apiKey}&${param}`;
-    return super.Get<ISearchResult>(param).pipe(switchMap(res => {
+    return super.GetMochData<IResponse<ISearchResult[]>>(param).pipe(switchMap(res => {
       // Initialize the accessor
       this.cinema = res;
       return of(res);

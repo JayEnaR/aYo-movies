@@ -3,6 +3,7 @@ import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup } from '@angu
 import { Subject, debounceTime, distinctUntilChanged, map, of, switchMap, takeUntil, tap } from 'rxjs';
 import { QueryTypeEnum } from 'src/app/enums/query-type.enum';
 import { IQueryType } from 'src/app/models/IQueryType';
+import { IResponse } from 'src/app/models/IResponse';
 import { ISearchResult } from 'src/app/models/ISearchResult';
 import { AudioVisualSearchService } from 'src/app/services/movie-search.service';
 import { ProgressBarService } from 'src/app/services/progress-bar.service';
@@ -45,15 +46,15 @@ export class SearchBarComponent implements OnInit {
   initQuery(name: string): string {
     switch (this.queryType) {
       case QueryTypeEnum.movie: {
-        name = `type=movie&t=${name}`;
+        name = `type=movie&s=${name}`;
         break;
       }
       case QueryTypeEnum.series: {
-        name = `type=series&t=${name}`;
+        name = `type=series&s=${name}`;
         break;
       }
       case QueryTypeEnum.episode: {
-        name = `type=episode&t=${name}`;
+        name = `type=episode&s=${name}`;
         break;
       }
     }
@@ -62,7 +63,7 @@ export class SearchBarComponent implements OnInit {
 
   clearSearch(): void {
     this.searchForm.reset();
-    this._movieSearchService.cinema = {} as ISearchResult;
+    this._movieSearchService.cinema = {} as IResponse<ISearchResult[]>;
   }
 
   // Filters results based on audiovisual type
@@ -73,7 +74,7 @@ export class SearchBarComponent implements OnInit {
       this._progressBarservice.showProgress(true);
       const query = this.initQuery(this.searchForm.controls['search'].value);
       const unsub = new Subject<void>();
-      this._movieSearchService.retrieveCinema(query).pipe(takeUntil(unsub)).subscribe(() => {
+      this._movieSearchService.retrieveCinemas(query).pipe(takeUntil(unsub)).subscribe(() => {
         this._progressBarservice.showProgress(false);
         unsub.next();
       });
@@ -88,8 +89,8 @@ export class SearchBarComponent implements OnInit {
         return control.valueChanges.pipe(
           debounceTime(1000),
           distinctUntilChanged(),
-          switchMap(phrase => this._movieSearchService.retrieveCinema(this.initQuery(phrase))),
-          map((res: ISearchResult) => res ? { noResult: true } : null),
+          switchMap(phrase => this._movieSearchService.retrieveCinemas(this.initQuery(phrase))),
+          map((res: IResponse<ISearchResult[]>) => res ? { noResult: true } : null),
           tap(() => this._progressBarservice.showProgress(false))
         );
       }
