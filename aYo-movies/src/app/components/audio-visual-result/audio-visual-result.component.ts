@@ -3,6 +3,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { ISearchResult } from 'src/app/models/ISearchResult';
 import { AudioVisualSearchService } from 'src/app/services/audio-visual-search.service';
 import { ProgressBarService } from 'src/app/services/progress-bar.service';
+import { IndexedDbService } from "../../services/indexed-db.service";
 
 @Component({
   selector: 'app-audio-visual-result',
@@ -21,7 +22,8 @@ export class AudioVisualResultComponent implements OnInit, OnDestroy {
   pagesRequested: number = 1;
 
   constructor(private _movieSearchService: AudioVisualSearchService,
-    private _progressBarService: ProgressBarService) {
+    private _progressBarService: ProgressBarService,
+    private _indexedDbService: IndexedDbService) {
   }
 
   ngOnInit(): void {
@@ -58,5 +60,13 @@ export class AudioVisualResultComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsub.next();
     this.unsub.complete();
+  }
+
+  watchLater(item: ISearchResult): void {
+    this._indexedDbService.addAudioVisual(item);
+  }
+
+  delete(item: ISearchResult): void {
+    this._indexedDbService.deleteAudioVisual(item);
   }
 }

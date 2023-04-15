@@ -9,6 +9,9 @@
                     <div class="text-gray-400 text-sm mt-1">{{item.Genre}}</div>
                     <div class="mt-4">{{item.Plot}}</div>
                 </div>
+                <button mat-icon-button (click)="watchLater(item)" matTooltip="Toggle dark mode on/off">
+                    <mat-icon color="accent">visibility</mat-icon>
+                </button>
             </mat-card>
         </ng-container>
         <ng-container *ngIf="audioVisuals.length == 0">
