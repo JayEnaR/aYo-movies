@@ -71,8 +71,8 @@ export class AudioVisualResultComponent implements OnInit, OnDestroy {
     this._indexedDbService.addAudioVisual(item);
   }
 
-  navigate(): void {
-    this._router.navigate(['view-details']);
+  navigate(title: string): void {
+    this._router.navigate([`view-details/${title}`]);
   }
 
 }
