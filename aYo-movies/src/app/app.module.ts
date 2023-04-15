@@ -11,6 +11,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { AudioVisualResultComponent } from './components/audio-visual-result/audio-visual-result.component';
 import { ProgressBarComponent } from './components/shared/progress-bar/progress-bar.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,13 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,6 +10,13 @@
       "cwd": "${workspaceFolder}/aYo-movies"
     },
     {
+      "name": "pwa",
+      "command": "npm run http-server",
+      "request": "launch",
+      "type": "node-terminal",
+      "cwd": "${workspaceFolder}/aYo-movies"
+    },
+    {
       "name": "ng serve",
       "type": "chrome",
       "request": "launch",
