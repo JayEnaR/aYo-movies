@@ -14,6 +14,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { WatchLaterComponent } from './components/watch-later/watch-later.component';
+import { AudioVisualDetailsComponent } from './components/audio-visual-details/audio-visual-details.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { WatchLaterComponent } from './components/watch-later/watch-later.compon
     SearchBarComponent,
     AudioVisualResultComponent,
     ProgressBarComponent,
-    WatchLaterComponent
+    WatchLaterComponent,
+    AudioVisualDetailsComponent
   ],
   imports: [
     HttpClientModule,
