@@ -15,10 +15,10 @@ export class AudioVisualResultComponent implements OnInit, OnDestroy {
   audioVisuals: ISearchResult[] = [];
   result: string = "";
 
-      // Scrolling
-      scrollDistance: number = 1;
-      throttle: number = 300;
-      pagesRequested: number = 1;
+  // Scrolling
+  scrollDistance: number = 1;
+  throttle: number = 300;
+  pagesRequested: number = 1;
 
   constructor(private _movieSearchService: AudioVisualSearchService,
     private _progressBarService: ProgressBarService) {
@@ -34,24 +34,23 @@ export class AudioVisualResultComponent implements OnInit, OnDestroy {
         // Only show item(s) when the response is truthy
         debugger
         this.result = "";
-        if(Object.keys(res).length == 0){
+        if (Object.keys(res).length == 0) {
           this.audioVisuals = [];
-        }else
-        {
-          
-          res.Response == "True" ? res.Search.forEach(a => {this.audioVisuals.push(a)}) : this.result = "No search results";
+        } else {
+          res.Response == "True" ?
+            res.Search.forEach(a => { this.audioVisuals.push(a) }) :
+            this.result = "No search results";
         }
       });
   }
 
   onScrollDown(): void {
     // Call API
-    // this._progressBarservice.showProgress(true);
+    this._progressBarService.showProgress(true);
     this.pagesRequested += 1;
-    const query =  "type=movie&s=harry&page=" + this.pagesRequested;
     const unsub = new Subject<void>();
-    this._movieSearchService.retrieveCinemasPaging(query).pipe(takeUntil(unsub)).subscribe(() => {
-      // this._progressBarservice.showProgress(false);
+    this._movieSearchService.retrieveCinemasPaging(this.pagesRequested).pipe(takeUntil(unsub)).subscribe(() => {
+      this._progressBarService.showProgress(false);
       unsub.next();
       unsub.complete();
     });

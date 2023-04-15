@@ -17,6 +17,7 @@ import { QueryTypeEnum } from '../enums/query-type.enum';
 export class AudioVisualSearchService extends BaseApiService {
 
   private queryType: QueryTypeEnum = QueryTypeEnum.movie;
+  private searchPhrase: string = "";
   private cinemaSrc = new Subject<IResponse<ISearchResult[]>>();
 
   get cinema$(): Observable<IResponse<ISearchResult[]>> {
@@ -35,12 +36,14 @@ export class AudioVisualSearchService extends BaseApiService {
   }
 
   // Retrieve audiovisual media from api
-  retrieveCinemas(param: string, queryType: QueryTypeEnum): Observable<IResponse<ISearchResult[]>> {
-    // Build the parameter first
+  retrieveCinemas(phrase: string, queryType: QueryTypeEnum): Observable<IResponse<ISearchResult[]>> {
+    // Only initial searches can initialize phrase and query type
+    this.searchPhrase = phrase;
     this.queryType = queryType;
-    const query = this.initializeQuery(param);
-    param = `?apikey=${this._mochApiService.apiKey}&${query}`;
-    return super.Get<IResponse<ISearchResult[]>>(param).pipe(switchMap(res => {
+    // Build the parameter first
+    const query = this.initializeQuery(phrase);
+    phrase = `?apikey=${this._mochApiService.apiKey}&${query}`;
+    return super.Get<IResponse<ISearchResult[]>>(phrase).pipe(switchMap(res => {
       // First clear the result
       this.cinema = {} as IResponse<ISearchResult[]>;
       // Initialize the accessor
@@ -50,9 +53,10 @@ export class AudioVisualSearchService extends BaseApiService {
   }
 
   // Retrieve audiovisual media from api
-  retrieveCinemasPaging(param: string): Observable<IResponse<ISearchResult[]>> {
+  retrieveCinemasPaging(page: number): Observable<IResponse<ISearchResult[]>> {
     // Build the parameter
-    param = `?apikey=${this._mochApiService.apiKey}&${param}`;
+    const query = `type=movie&s=${this.searchPhrase}&page=${page}`;
+    const param = `?apikey=${this._mochApiService.apiKey}&${query}`;
     return super.Get<IResponse<ISearchResult[]>>(param).pipe(switchMap(res => {
       // Initialize the accessor
       this.cinema = res
