@@ -3,7 +3,9 @@
     <mat-toolbar>
         <div
             class="flex flex-0 items-center justify-between w-full h-16 sm:h-20 px-6 sm:px-8 z-49 bg-card gap-4">
-            <img src="assets/images/aYo-movies-logo.png" alt="aYo logo" class="w-48">
+            <a routerLink="/">
+                <img src="assets/images/aYo-movies-logo.png" alt="aYo logo" class="w-48">
+            </a>
             <div class="">
                 <button mat-icon-button [routerLink]="'watch-later'" matTooltip="View your watch later list">
                     <mat-icon >visibility</mat-icon>
