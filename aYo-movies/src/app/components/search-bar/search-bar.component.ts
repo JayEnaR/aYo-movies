@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, AsyncValidatorFn, FormBuilder, FormGroup } from '@angular/forms';
 import { Subject, debounceTime, distinctUntilChanged, map, of, switchMap, takeUntil, tap } from 'rxjs';
+import { animations } from 'src/app/animations/public-api';
 import { QueryTypeEnum } from 'src/app/enums/query-type.enum';
 import { IQueryType } from 'src/app/models/IQueryType';
 import { IResponse } from 'src/app/models/IResponse';
@@ -11,7 +12,9 @@ import { ProgressBarService } from 'src/app/services/progress-bar.service';
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.scss']
+  styleUrls: ['./search-bar.component.scss'],
+  animations: animations,
+  host: {'[@fadeInOut]': ''}
 })
 export class SearchBarComponent implements OnInit {
 

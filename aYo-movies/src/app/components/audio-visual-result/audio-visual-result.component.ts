@@ -4,11 +4,14 @@ import { ISearchResult } from 'src/app/models/ISearchResult';
 import { AudioVisualSearchService } from 'src/app/services/audio-visual-search.service';
 import { ProgressBarService } from 'src/app/services/progress-bar.service';
 import { IndexedDbService } from "../../services/indexed-db.service";
+import { animations } from 'src/app/animations/public-api';
 
 @Component({
   selector: 'app-audio-visual-result',
   templateUrl: './audio-visual-result.component.html',
-  styleUrls: ['./audio-visual-result.component.scss']
+  styleUrls: ['./audio-visual-result.component.scss'],
+  animations: animations,
+  host: { '[@fadeInOut]': '' }
 })
 export class AudioVisualResultComponent implements OnInit, OnDestroy {
 

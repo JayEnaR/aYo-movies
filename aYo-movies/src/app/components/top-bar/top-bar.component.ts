@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { animations } from 'src/app/animations/public-api';
 import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-top-bar',
   templateUrl: './top-bar.component.html',
-  styleUrls: ['./top-bar.component.scss']
+  styleUrls: ['./top-bar.component.scss'],
+  animations: animations,
+  host: {'[@fadeInOut]': ''}
 })
 export class TopBarComponent implements OnInit {
 
