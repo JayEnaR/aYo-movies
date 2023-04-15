@@ -20,6 +20,7 @@ export class SearchBarComponent implements OnInit {
   queryType: QueryTypeEnum = QueryTypeEnum.movie;
   queryTypes: IQueryType[] = [];
 
+
   constructor(private _formBuilder: FormBuilder,
     private _movieSearchService: AudioVisualSearchService,
     private _progressBarservice: ProgressBarService) {
@@ -42,44 +43,27 @@ export class SearchBarComponent implements OnInit {
     });
   }
 
-  // Builds the appropriate query based on audiovisual type
-  initQuery(name: string): string {
-    switch (this.queryType) {
-      case QueryTypeEnum.movie: {
-        name = `type=movie&s=${name}`;
-        break;
-      }
-      case QueryTypeEnum.series: {
-        name = `type=series&s=${name}`;
-        break;
-      }
-      case QueryTypeEnum.episode: {
-        name = `type=episode&s=${name}`;
-        break;
-      }
-    }
-    return name;
-  }
 
   clearSearch(): void {
     this.searchForm.reset();
     this._movieSearchService.cinema = {} as IResponse<ISearchResult[]>;
   }
 
-  // Filters results based on audiovisual type
+  // Filters results based on audiovisual type selected
   onChipChange(val: QueryTypeEnum): void {
     this.queryType = val;
     const name = this.searchForm.controls['search'].value;
     if (name) {
       this._progressBarservice.showProgress(true);
-      const query = this.initQuery(this.searchForm.controls['search'].value);
       const unsub = new Subject<void>();
-      this._movieSearchService.retrieveCinemas(query).pipe(takeUntil(unsub)).subscribe(() => {
+      this._movieSearchService.retrieveCinemas(name, val).pipe(takeUntil(unsub)).subscribe(() => {
         this._progressBarservice.showProgress(false);
         unsub.next();
+        unsub.complete();
       });
     }
   }
+
 
   // Call the endpoint on keychange after 1 second
   searchBarValidator(): AsyncValidatorFn {
@@ -89,13 +73,19 @@ export class SearchBarComponent implements OnInit {
         return control.valueChanges.pipe(
           debounceTime(1000),
           distinctUntilChanged(),
-          switchMap(phrase => this._movieSearchService.retrieveCinemas(this.initQuery(phrase))),
-          map((res: IResponse<ISearchResult[]>) => res ? { noResult: true } : null),
-          tap(() => this._progressBarservice.showProgress(false))
+          switchMap(phrase => this._movieSearchService.retrieveCinemas(phrase, this.queryType)),
+          map((res: IResponse<ISearchResult[]>) => res ),
+          tap(a => {
+            console.log(a);
+            
+             this._progressBarservice.showProgress(false)})
         );
       }
       return of();
     }
   }
+
+  // on search clears the subject on the service
+  // on scroll does not clear the subject on the service
 
 }

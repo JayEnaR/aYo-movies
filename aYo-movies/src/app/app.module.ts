@@ -10,6 +10,7 @@ import { AudioVisualSearchComponent } from './components/audio-visual-search/aud
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { AudioVisualResultComponent } from './components/audio-visual-result/audio-visual-result.component';
 import { ProgressBarComponent } from './components/shared/progress-bar/progress-bar.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ProgressBarComponent } from './components/shared/progress-bar/progress-
     SharedModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]
