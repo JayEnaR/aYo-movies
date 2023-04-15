@@ -5,7 +5,7 @@ import { QueryTypeEnum } from 'src/app/enums/query-type.enum';
 import { IQueryType } from 'src/app/models/IQueryType';
 import { IResponse } from 'src/app/models/IResponse';
 import { ISearchResult } from 'src/app/models/ISearchResult';
-import { AudioVisualSearchService } from 'src/app/services/movie-search.service';
+import { AudioVisualSearchService } from 'src/app/services/audio-visual-search.service';
 import { ProgressBarService } from 'src/app/services/progress-bar.service';
 
 @Component({

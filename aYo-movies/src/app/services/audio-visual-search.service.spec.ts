@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AudioVisualSearchService } from './movie-search.service';
+import { AudioVisualSearchService } from './audio-visual-search.service';
 
 describe('AudioVisualSearchService', () => {
   let service: AudioVisualSearchService;

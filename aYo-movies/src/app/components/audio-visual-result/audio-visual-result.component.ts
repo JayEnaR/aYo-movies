@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { ISearchResult } from 'src/app/models/ISearchResult';
-import { AudioVisualSearchService } from 'src/app/services/movie-search.service';
+import { AudioVisualSearchService } from 'src/app/services/audio-visual-search.service';
 import { ProgressBarService } from 'src/app/services/progress-bar.service';
 
 @Component({
