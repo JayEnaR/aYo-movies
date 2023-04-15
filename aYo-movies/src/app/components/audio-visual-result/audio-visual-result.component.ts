@@ -32,7 +32,6 @@ export class AudioVisualResultComponent implements OnInit, OnDestroy {
     this._movieSearchService.cinema$.pipe(takeUntil(this.unsub))
       .subscribe(res => {
         // Only show item(s) when the response is truthy
-        debugger
         this.result = "";
         if (Object.keys(res).length == 0) {
           this.audioVisuals = [];
