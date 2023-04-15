@@ -2,14 +2,14 @@
     <ng-container
     *ngFor="let item of _indexedDbService.audioVisualFavorites$ | async; trackBy: identifyList">
         <mat-card class="flex flex-col max-w-72 w-72 mt-8">
-            <img src="{{item.Poster}}" alt="poster" class="object-cover rounded-t-md">
+            <img src="{{item.Poster}}" alt="poster" class="object-cover rounded-t-md scale-100 hover:scale-125 ease-in duration-200">
             <div class="mt-8">
                 <div class="text-2xl font-semibold leading-tight">{{item.Title}}</div>
                 <div class="text-gray-400 text-sm mt-1">{{item.Genre}}</div>
                 <div class="mt-4">{{item.Plot}}</div>
             </div>
             <button mat-icon-button (click)="watchLater(item)" matTooltip="Remove from watch later">
-                <mat-icon color="warn" appearance="outline">delete</mat-icon>
+                <mat-icon >delete</mat-icon>
             </button>
         </mat-card>
     </ng-container>

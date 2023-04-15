@@ -85,7 +85,4 @@ export class SearchBarComponent implements OnInit {
     }
   }
 
-  // on search clears the subject on the service
-  // on scroll does not clear the subject on the service
-
 }
