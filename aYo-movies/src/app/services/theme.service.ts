@@ -6,16 +6,21 @@ import { ReplaySubject, Subject } from 'rxjs';
 })
 export class ThemeService {
 
-  private isDarkModeSrc : ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+  private isDarkModeSrc: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
   isDarkMode$ = this.isDarkModeSrc.asObservable();
 
-  constructor() { 
+  constructor() {
     const isDark = JSON.parse(localStorage.getItem('darkMode')!) === true;
     this.toggleDarkMode(isDark);
-   }
+  }
 
   toggleDarkMode(isDark: boolean): void {
     this.isDarkModeSrc.next(isDark);
     localStorage.setItem('darkMode', isDark.toString());
+    if (isDark) {
+      document.querySelector('html')?.setAttribute('class', 'mat-app-background theme-alternate');
+    } else {
+      document.querySelector('html')?.setAttribute('class', 'mat-app-background');
+    }
   }
 }

@@ -9,13 +9,7 @@ import { ThemeService } from './services/theme.service';
 export class AppComponent {
 
   title = 'aYo-movies';
-  isDarkMode: boolean = false;
 
-  constructor(private _themeService: ThemeService) {
-    this._themeService.isDarkMode$.subscribe(isDark => {
-      this.isDarkMode = isDark;
-    });
+  constructor() {
   }
-
-
 }
