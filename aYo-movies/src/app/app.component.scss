@@ -1,0 +1,20 @@
+::ng-deep .app-snackSuccess{
+    margin-top:30px;
+    background-color:#97bea4 !important;
+    color: black !important;
+}
+::ng-deep .app-snackInfo{
+    margin-top:30px;
+    background-color:#b8d8fa !important;
+    color: black !important;
+}
+::ng-deep .app-snackWarn{
+    margin-top:30px;
+    background-color:#fdd98b !important;
+    color: black !important;
+}
+::ng-deep .app-snackErr{
+    margin-top:30px;
+    background-color:#e97a7a !important;
+    color: black !important;
+}
