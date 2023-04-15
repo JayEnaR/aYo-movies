@@ -12,4 +12,5 @@ This is a basic Angular application to interact with the [omdbapi](https://omdba
 ## Enahancements (Secondary)
 - Fade animations
 - Custom snack bar service
+- Progress bar/loader
 - Coding standards for *future-proofing*, *maintaining*, and *customization*
