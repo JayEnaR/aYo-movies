@@ -5,6 +5,7 @@ import { AudioVisualSearchService } from 'src/app/services/audio-visual-search.s
 import { ProgressBarService } from 'src/app/services/progress-bar.service';
 import { IndexedDbService } from "../../services/indexed-db.service";
 import { animations } from 'src/app/animations/public-api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-audio-visual-result',
@@ -26,7 +27,8 @@ export class AudioVisualResultComponent implements OnInit, OnDestroy {
 
   constructor(private _movieSearchService: AudioVisualSearchService,
     private _progressBarService: ProgressBarService,
-    private _indexedDbService: IndexedDbService) {
+    private _indexedDbService: IndexedDbService,
+    private _router: Router) {
   }
 
   ngOnInit(): void {
@@ -67,6 +69,10 @@ export class AudioVisualResultComponent implements OnInit, OnDestroy {
 
   watchLater(item: ISearchResult): void {
     this._indexedDbService.addAudioVisual(item);
+  }
+
+  navigate(): void {
+    this._router.navigate(['view-details']);
   }
 
 }
