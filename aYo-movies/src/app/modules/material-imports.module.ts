@@ -8,6 +8,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 
@@ -22,7 +23,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatChipsModule,
     MatProgressBarModule,
     MatCardModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTooltipModule
   ],
   exports: [
     MatIconModule,
@@ -32,7 +34,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatChipsModule,
     MatProgressBarModule,
     MatCardModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTooltipModule
   ]
 })
 export class MaterialImportsModule { }
