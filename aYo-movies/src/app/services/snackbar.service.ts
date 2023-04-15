@@ -12,7 +12,7 @@ export class SnackbarService {
   showSnackBar(msg: string, snackbarType: SnackbarTypeEnum, duration: number): void {
     let cssClass = "";
     switch(snackbarType){
-      case SnackbarTypeEnum.ok: {
+      case SnackbarTypeEnum.success: {
         cssClass = "app-snackSuccess";
         break;
       }

@@ -7,6 +7,8 @@ import { MochApiService } from './moch-api.service';
 import { ISearchResult } from '../models/ISearchResult';
 import { IResponse } from '../models/IResponse';
 import { QueryTypeEnum } from '../enums/query-type.enum';
+import { SnackbarService } from './snackbar.service';
+import { SnackbarTypeEnum } from '../enums/snackbar-type.enum';
 
 /**
  *  A service for retrieving movies
@@ -30,9 +32,14 @@ export class AudioVisualSearchService extends BaseApiService {
 
   constructor(private _httpClient: HttpClient,
     private configService: ConfigService,
-    private _mochApiService: MochApiService) {
+    private _mochApiService: MochApiService,
+    private _snackBarService: SnackbarService) {
     super(_httpClient, configService.apiBaseUrl);
 
+    // Handle/display errors from base api service
+    this.errorResponse$.subscribe(e => {
+      this._snackBarService.showSnackBar(e, SnackbarTypeEnum.error, 5000);
+    });
   }
 
   // Retrieve audiovisual media from api

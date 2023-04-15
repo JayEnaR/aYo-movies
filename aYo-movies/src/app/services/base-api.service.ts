@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, Subject, catchError, of } from 'rxjs';
 import { ConfigService } from './config.service';
 import { MochApiService } from './moch-api.service';
 
@@ -12,6 +12,9 @@ import { MochApiService } from './moch-api.service';
   providedIn: 'root'
 })
 export class BaseApiService {
+
+  private errorResponseSrc = new Subject<string>();
+  errorResponse$ = this.errorResponseSrc.asObservable();
 
   constructor(public httpClient: HttpClient,
     @Inject(ConfigService) private _apiEndpointUrl: string) {
@@ -35,6 +38,7 @@ export class BaseApiService {
 
   private handleError(e: HttpErrorResponse): Observable<any> {
     // Could display some notification to the user here
+    this.errorResponseSrc.next(e.message);
     return of(e);
   }
 }
