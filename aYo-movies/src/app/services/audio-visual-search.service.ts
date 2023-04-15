@@ -42,7 +42,12 @@ export class AudioVisualSearchService extends BaseApiService {
     });
   }
 
-  // Retrieve audiovisual media from api
+  /**
+* Retrieve audiovisual media from api
+* @param number title of the audiovisual
+* @param QueryTypeEnum The type of audiovisual
+* @return - Returns a list of the audiovisuals
+*/
   retrieveCinemas(phrase: string, queryType: QueryTypeEnum): Observable<IResponse<ISearchResult[]>> {
     // Only initial searches can initialize phrase and query type
     this.searchPhrase = phrase;
@@ -59,7 +64,11 @@ export class AudioVisualSearchService extends BaseApiService {
     }));
   }
 
-  // Retrieve audiovisual media from api
+  /**
+ * Retrieve audiovisual media from api
+ * @param number Page number of the audiovisual
+ * @return - Returns a list of the audiovisuals
+ */
   retrieveCinemasPaging(page: number): Observable<IResponse<ISearchResult[]>> {
     // Build the parameter
     const query = `type=movie&s=${this.searchPhrase}&page=${page}`;
@@ -69,6 +78,18 @@ export class AudioVisualSearchService extends BaseApiService {
       this.cinema = res
       return of(res);
     }));
+  }
+
+  /**
+   * Send a custom greeting to a person.
+   * @param string Title of the audiovisual
+   * @return - Returns the details of the audiovisual
+   */
+  retrieveCinemaDetails(title: string): Observable<IResponse<ISearchResult>> {
+    // Build the parameter
+    const param = `?apikey=${this._mochApiService.apiKey}&t=${title}`;
+    debugger
+    return super.Get<IResponse<ISearchResult>>(param);
   }
 
   // Builds the appropriate query based on audiovisual type
