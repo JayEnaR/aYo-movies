@@ -8,8 +8,6 @@ import { ThemeService } from './services/theme.service';
 })
 export class AppComponent {
 
-  title = 'aYo-movies';
-
   constructor() {
   }
 }
