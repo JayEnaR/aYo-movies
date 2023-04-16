@@ -1,8 +1,7 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable, Subject, catchError, of } from 'rxjs';
 import { ConfigService } from './config.service';
-import { MochApiService } from './moch-api.service';
 
 /**
  * Base service for handling all generic http requests and handle the errors
