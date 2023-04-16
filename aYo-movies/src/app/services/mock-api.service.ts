@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class MochApiService {
+export class MockApiService {
 
   private apiKeySubject: Subject<string> = new Subject<string>();
   apiKey!: string; 
