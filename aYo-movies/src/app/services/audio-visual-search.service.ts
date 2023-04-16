@@ -3,7 +3,7 @@ import { BaseApiService } from './base-api.service';
 import { ConfigService } from './config.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, switchMap, of, BehaviorSubject } from 'rxjs';
-import { MochApiService } from './moch-api.service';
+import { MockApiService } from './mock-api.service';
 import { ISearchResult } from '../models/ISearchResult';
 import { IResponse } from '../models/IResponse';
 import { QueryTypeEnum } from '../enums/query-type.enum';
@@ -32,7 +32,7 @@ export class AudioVisualSearchService extends BaseApiService {
 
   constructor(private _httpClient: HttpClient,
     private configService: ConfigService,
-    private _mochApiService: MochApiService,
+    private _MockApiService: MockApiService,
     private _snackBarService: SnackbarService) {
     super(_httpClient, configService.apiBaseUrl);
 
@@ -54,7 +54,7 @@ export class AudioVisualSearchService extends BaseApiService {
     this.queryType = queryType;
     // Build the parameter first
     const query = this.initializeQuery(phrase);
-    phrase = `?apikey=${this._mochApiService.apiKey}&${query}`;
+    phrase = `?apikey=${this._MockApiService.apiKey}&${query}`;
     return super.Get<IResponse<ISearchResult[]>>(phrase).pipe(switchMap(res => {
       // First clear the result
       this.cinema = {} as IResponse<ISearchResult[]>;
@@ -72,7 +72,7 @@ export class AudioVisualSearchService extends BaseApiService {
   retrieveCinemasPaging(page: number): Observable<IResponse<ISearchResult[]>> {
     // Build the parameter
     const query = `type=movie&s=${this.searchPhrase}&page=${page}`;
-    const param = `?apikey=${this._mochApiService.apiKey}&${query}`;
+    const param = `?apikey=${this._MockApiService.apiKey}&${query}`;
     return super.Get<IResponse<ISearchResult[]>>(param).pipe(switchMap(res => {
       // Initialize the accessor
       this.cinema = res
@@ -87,7 +87,7 @@ export class AudioVisualSearchService extends BaseApiService {
    */
   retrieveCinemaDetails(title: string): Observable<IResponse<ISearchResult>> {
     // Build the parameter
-    const param = `?apikey=${this._mochApiService.apiKey}&t=${title}`;
+    const param = `?apikey=${this._MockApiService.apiKey}&t=${title}`;
     return super.Get<IResponse<ISearchResult>>(param);
   }
 
