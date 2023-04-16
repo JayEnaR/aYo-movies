@@ -33,6 +33,7 @@ export class SearchBarComponent implements OnInit {
       this.hasValue = (value ? true : false);
       if(!value){
         this._movieSearchService.cinema = {} as IResponse<ISearchResult[]>;
+        this._progressBarservice.showProgress(false);
       }
     });
   }
@@ -75,11 +76,11 @@ export class SearchBarComponent implements OnInit {
   searchBarValidator(): AsyncValidatorFn {
     return (control: AbstractControl) => {
       if (control.value) {
+        this._progressBarservice.showProgress(true);
         return control.valueChanges.pipe(
           debounceTime(1000),
           distinctUntilChanged(),
           switchMap(phrase => { 
-            this._progressBarservice.showProgress(true);
             return this._movieSearchService.retrieveCinemas(phrase, this.queryType);
           }),
           map((res: IResponse<ISearchResult[]>) => res ),
