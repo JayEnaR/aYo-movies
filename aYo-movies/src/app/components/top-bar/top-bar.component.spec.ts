@@ -9,10 +9,10 @@ describe('TopBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[BrowserAnimationsModule],
-      declarations: [ TopBarComponent ]
+      imports: [BrowserAnimationsModule],
+      declarations: [TopBarComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(TopBarComponent);
     component = fixture.componentInstance;
@@ -23,7 +23,7 @@ describe('TopBarComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Should toggle dark mode on/off', () => {
+  it('should toggle dark mode on/off', () => {
     component.onDarkModeToggle();
   });
 
