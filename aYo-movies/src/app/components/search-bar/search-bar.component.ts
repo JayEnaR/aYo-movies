@@ -27,9 +27,13 @@ export class SearchBarComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder,
     private _movieSearchService: AudioVisualSearchService,
     private _progressBarservice: ProgressBarService) {
+
     this.searchForm = this.buildForm();
     this.searchForm.get('search')!.valueChanges.subscribe((value: string) => {
       this.hasValue = (value ? true : false);
+      if(!value){
+        this._movieSearchService.cinema = {} as IResponse<ISearchResult[]>;
+      }
     });
   }
 
@@ -45,7 +49,6 @@ export class SearchBarComponent implements OnInit {
       search: ['', [], this.searchBarValidator()]
     });
   }
-
 
   clearSearch(): void {
     this.searchForm.reset();
@@ -72,15 +75,15 @@ export class SearchBarComponent implements OnInit {
   searchBarValidator(): AsyncValidatorFn {
     return (control: AbstractControl) => {
       if (control.value) {
-        this._progressBarservice.showProgress(true);
         return control.valueChanges.pipe(
           debounceTime(1000),
           distinctUntilChanged(),
-          switchMap(phrase => this._movieSearchService.retrieveCinemas(phrase, this.queryType)),
+          switchMap(phrase => { 
+            this._progressBarservice.showProgress(true);
+            return this._movieSearchService.retrieveCinemas(phrase, this.queryType);
+          }),
           map((res: IResponse<ISearchResult[]>) => res ),
-          tap(a => {
-            console.log(a);
-            
+          tap(() => {
              this._progressBarservice.showProgress(false)})
         );
       }
