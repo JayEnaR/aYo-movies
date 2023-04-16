@@ -74,5 +74,6 @@ export class AudioVisualResultComponent implements OnInit, OnDestroy {
   navigate(title: string): void {
     this._router.navigate([`view-details/${title}`]);
   }
+  
 
 }
