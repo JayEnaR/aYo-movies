@@ -1,6 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WatchLaterComponent } from './watch-later.component';
+import { IndexedDbService } from 'src/app/services/indexed-db.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ISearchResult } from 'src/app/models/ISearchResult';
+
+class MockServiceDependencyStub {
+  showSnackBar(){}
+}
 
 describe('WatchLaterComponent', () => {
   let component: WatchLaterComponent;
@@ -8,7 +16,9 @@ describe('WatchLaterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WatchLaterComponent ]
+      imports:[BrowserAnimationsModule],
+      declarations: [ WatchLaterComponent ],
+      providers: [IndexedDbService, { provide: SnackbarService, useClass: MockServiceDependencyStub }]
     })
     .compileComponents();
 
@@ -20,4 +30,11 @@ describe('WatchLaterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should add to watchlist', () => {
+    const val: ISearchResult = { imdbID: "123", Title: "Test" } as ISearchResult;
+    component.watchLater(val);
+  });
+
+
 });
