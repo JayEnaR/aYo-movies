@@ -5,12 +5,14 @@
                 <div class="flex flex-row md:flex-nowrap flex-wrap mt-8 gap-4">
                     <img src="{{audioVisual.Poster}}" alt="poster"
                         class="m-auto cursor-pointer object-cover rounded-t-md">
-                    <div class="mt-8">
+                    <div class=" ml-4">
                         <div class="text-2xl font-semibold leading-tight">{{audioVisual.Title}}</div>
-                        <div class="text-gray-400 text-sm mt-1">{{audioVisual.Genre}}</div>
-                        <div class="mt-4">{{audioVisual.Plot}}</div>
+                        <div class="text-gray-400 text-md mt-1">{{audioVisual.Genre}}</div>
+                        <div class="my-4 ">{{audioVisual.Plot}}</div>
+                        <ng-container *ngFor="let rating of audioVisual.Ratings" >
+                            <div class="text-gray-400 text-sm">{{rating.Source}}: {{rating.Value}}</div>
+                        </ng-container>
                         <div class="flex justify-center m-8">
-
                             <button mat-raised-button class="w-1/2" color="primary">Play
                                 <mat-icon>play_arrow</mat-icon>
                             </button>
