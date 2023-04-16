@@ -71,7 +71,7 @@ export class AudioVisualSearchService extends BaseApiService {
  */
   retrieveCinemasPaging(page: number): Observable<IResponse<ISearchResult[]>> {
     // Build the parameter
-    const query = `type=movie&s=${this.searchPhrase}&page=${page}`;
+    const query = `type=${QueryTypeEnum[this.queryType]}&s=${this.searchPhrase}&page=${page}`;
     const param = `?apikey=${this._MockApiService.apiKey}&${query}`;
     return super.Get<IResponse<ISearchResult[]>>(param).pipe(switchMap(res => {
       // Initialize the accessor
