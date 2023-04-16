@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TopBarComponent } from './top-bar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('TopBarComponent', () => {
   let component: TopBarComponent;
@@ -8,6 +9,7 @@ describe('TopBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports:[BrowserAnimationsModule],
       declarations: [ TopBarComponent ]
     })
     .compileComponents();
@@ -20,4 +22,9 @@ describe('TopBarComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Should toggle dark mode on/off', () => {
+    component.onDarkModeToggle();
+  });
+
 });
