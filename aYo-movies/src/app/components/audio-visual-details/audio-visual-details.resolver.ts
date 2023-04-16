@@ -22,7 +22,6 @@ export class AudioVisualDetailsResolver implements Resolve<IResponse<ISearchResu
     this._progressBarService.showProgress(true);
     let queryParam: string = route.params['title'];
     if(queryParam){
-      queryParam = queryParam.replaceAll(' ', '+');
       return this._audioVisualService.retrieveCinemaDetails(queryParam);
     }
     return of();
