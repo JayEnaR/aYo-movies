@@ -86,6 +86,7 @@ export class AudioVisualSearchService extends BaseApiService {
    * @return - Returns the details of the audiovisual
    */
   retrieveCinemaDetails(title: string): Observable<IResponse<ISearchResult>> {
+    title = title.replaceAll(' ', '+');
     // Build the parameter
     const param = `?apikey=${this._MockApiService.apiKey}&t=${title}`;
     return super.Get<IResponse<ISearchResult>>(param);
