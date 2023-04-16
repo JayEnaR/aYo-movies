@@ -1,16 +1,20 @@
-<div class="flex flex-col  items-center w-full h-full mt-8 ">
-    
-        <mat-card class="flex flex-row mt-8">
-            <img src="{{audioVisual.Poster}}" alt="poster"
-                class="cursor-pointer object-cover rounded-t-md">
-            <div class="mt-8">
-                <div class="text-2xl font-semibold leading-tight">{{audioVisual.Title}}</div>
-                <div class="text-gray-400 text-sm mt-1">{{audioVisual.Genre}}</div>
-                <div class="mt-4">{{audioVisual.Plot}}</div>
+<div class="flex flex-col  items-center w-full h-full ">
+    <div class="flex flex-row flex-wrap gap-4 md:m-8">
+        <mat-card class="relative">
+            <div class="flex flex-row md:flex-nowrap flex-wrap mt-8 gap-4">
+                <img src="{{audioVisual.Poster}}" alt="poster" class="cursor-pointer object-cover rounded-t-md">
+                <div class="mt-8">
+                    <div class="text-2xl font-semibold leading-tight">{{audioVisual.Title}}</div>
+                    <div class="text-gray-400 text-sm mt-1">{{audioVisual.Genre}}</div>
+                    <div class="mt-4">{{audioVisual.Plot}}</div>
+                    <div class="flex justify-center m-8">
+
+                        <button mat-raised-button class="w-1/2" color="primary">Play
+                            <mat-icon >play_arrow</mat-icon>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <button mat-icon-button matTooltip="Add to watch later">
-                <mat-icon>schedule</mat-icon>
-            </button>
         </mat-card>
-    
+    </div>
 </div>

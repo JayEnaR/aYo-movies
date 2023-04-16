@@ -88,7 +88,6 @@ export class AudioVisualSearchService extends BaseApiService {
   retrieveCinemaDetails(title: string): Observable<IResponse<ISearchResult>> {
     // Build the parameter
     const param = `?apikey=${this._mochApiService.apiKey}&t=${title}`;
-    debugger
     return super.Get<IResponse<ISearchResult>>(param);
   }
 
