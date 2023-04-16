@@ -7,6 +7,7 @@ import { AudioVisualDetailsResolver } from './components/audio-visual-details/au
 
 const routes: Routes = [
   { path: '', component: AudioVisualSearchComponent },
+  { path: 'search/:title/:type', component: AudioVisualSearchComponent },
   { path: 'watch-later', component: WatchLaterComponent },
   {
     path: 'view-details/:title', component: AudioVisualDetailsComponent, resolve: {
