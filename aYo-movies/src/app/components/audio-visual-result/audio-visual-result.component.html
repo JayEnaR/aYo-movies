@@ -3,16 +3,22 @@
     <div class="flex flex-row flex-wrap justify-center gap-4 ">
         <ng-container *ngFor="let item of audioVisuals" >
             <mat-card class="flex flex-col w-96 sm:w-96 md:w-72 mt-8" [@fadeInOut]="true">
-                <img src="{{item.Poster}}" alt="poster" (click)="navigate(item.Title)"
+                <img src="{{item.Poster}}" alt="poster" 
                     class="w-full md:w-72 cursor-pointer object-cover rounded-t-md scale-100 md:hover:scale-125 ease-in duration-200">
                 <div class="mt-8">
                     <div class="text-2xl font-semibold leading-tight">{{item.Title}}</div>
                     <div class="text-gray-400 text-sm mt-1">{{item.Genre}}</div>
                     <div class="mt-4">{{item.Plot}}</div>
                 </div>
-                <button mat-icon-button (click)="watchLater(item)" matTooltip="Add to watch later">
-                    <mat-icon >schedule</mat-icon>
-                </button>
+                <div >
+                    <button mat-icon-button (click)="watchLater(item)" matTooltip="Add to watch later">
+                        <mat-icon >schedule</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="navigate(item.Title)" matTooltip="Add to watch later">
+                        <mat-icon >info</mat-icon>
+                    </button>
+
+                </div>
             </mat-card>
         </ng-container>
         <ng-container *ngIf="audioVisuals.length == 0">
